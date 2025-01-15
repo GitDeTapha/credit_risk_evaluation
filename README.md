@@ -1,79 +1,137 @@
-# Data Project Template
+# Credit_Risk_Evaluation
 
-<a target="_blank" href="https://datalumina.com/">
-    <img src="https://img.shields.io/badge/Datalumina-Project%20Template-2856f7" alt="Datalumina Project" />
-</a>
+## Description
 
-## Cookiecutter Data Science
-This project template is a simplified version of the [Cookiecutter Data Science](https://cookiecutter-data-science.drivendata.org) template, created to suit the needs of Datalumina and made available as a GitHub template.
+This project aims to develop and deploy a machine learning model for credit risk evaluation. The main objectives include:
 
-## Adjusting .gitignore
+1. Building a robust credit risk prediction model using historical data to assess the likelihood of credit repayment.
+2. Serialising the trained model in `.pkl` format for reuse and integration into production.
+3. Creating a RESTful API with Flask to enable interaction with the model, providing predictions based on user inputs.
+4. Containerising the application with Docker and pushing the image to Docker Hub for ease of deployment.
+5. Deploying the application on AWS for scalability and accessibility.
 
-Ensure you adjust the `.gitignore` file according to your project needs. For example, since this is a template, the `/data/` folder is commented out and data will not be exlucded from source control:
+The dataset used is the German Credit Data, available on Kaggle: [https://www.kaggle.com/code/mathchi/credit-risk-evaluation/input?select=german_credit_data.csv](https://www.kaggle.com/code/mathchi/credit-risk-evaluation/input?select=german_credit_data.csv)
 
-```plaintext
-# exclude data from source control by default
-# /data/
-```
+## Installation
 
-Typically, you want to exclude this folder if it contains either sensitive data that you do not want to add to version control or large files.
+### Prerequisites
 
-## Duplicating the .env File
-To set up your environment variables, you need to duplicate the `.env.example` file and rename it to `.env`. You can do this manually or using the following terminal command:
+Ensure you have the following installed:
 
-```bash
-cp .env.example .env # Linux, macOS, Git Bash, WSL
-copy .env.example .env # Windows Command Prompt
-```
+- Python (>=3.12)
+- Docker
+- AWS CLI
+- Flask
+- Required Python libraries (listed in `requirements.txt`)
 
-This command creates a copy of `.env.example` and names it `.env`, allowing you to configure your environment variables specific to your setup.
+### Steps
 
+1. Clone the repository:
 
-## Project Organization
+   ```bash
+   git clone https://github.com/your-repo-name.git
+   cd credit-risk-evaluation
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Run the Flask application locally :
+
+   ```bash
+   python main.py
+   ```
+
+4. Build the Docker image:
+
+   ```bash
+   docker build -t credit-risk-api .
+   ```
+
+5. Push the Docker image to Docker Hub:
+
+   ```bash
+   docker tag credit-risk-api your_repo_name (e.g. moustapha2024)/credit-risk-repo
+   docker push your_repo_name/credit-risk-repo
+   ```
+
+6. Deploy the application on AWS ECS (refer to the deployment section for details).
+
+## Project Organisation
 
 ```
 ├── LICENSE            <- Open-source license if one is chosen
 ├── README.md          <- The top-level README for developers using this project
 ├── data
-│   ├── external       <- Data from third party sources
-│   ├── interim        <- Intermediate data that has been transformed
 │   ├── processed      <- The final, canonical data sets for modeling
 │   └── raw            <- The original, immutable data dump
 │
 ├── models             <- Trained and serialized models, model predictions, or model summaries
-│
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`
+│   └── rf_model_0_1.pkl
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials
 │
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
+├── images             <- Contains captured images about applications
+│   ├── images_deploiement        <- Screenshots of deployment processes and results
+│   └── images_web_interface      <- Screenshots of the web interface
 │
 ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
 │                         generated with `pip freeze > requirements.txt`
 │
 └── src                         <- Source code for this project
-    │
-    ├── __init__.py             <- Makes src a Python module
-    │
-    ├── config.py               <- Store useful variables and configuration
-    │
-    ├── dataset.py              <- Scripts to download or generate data
-    │
-    ├── features.py             <- Code to create features for modeling
-    │
-    │    
     ├── modeling                
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
-    │   └── train.py            <- Code to train models
-    │
-    ├── plots.py                <- Code to create visualizations 
-    │
-    └── services                <- Service classes to connect with external platforms, tools, or APIs
-        └── __init__.py 
+    │   ├── __init__.py         
+    │   ├── credit_risk.ipynb   <- Data mining notebook for credit risk prediction          
+    └── app                    <- Flask application source files
 ```
 
---------
+## Deployment
+
+### Docker Deployment
+
+1. Build and tag the Docker image:
+   ```bash
+   docker build -t credit-risk-api .
+   docker tag credit-risk-api moustapha2024/credit-risk-repo
+   ```
+2. Push the image to Docker Hub:
+   ```bash
+   docker push moustapha2024/credit-risk-repo
+   ```
+
+### AWS Deployment
+
+1. Create an ECS Cluster using the AWS Management Console.
+2. Define a Task Definition and Service to run the container.
+3. Pull the Docker image from Docker Hub and deploy it to AWS ECS.
+
+Refer to the image below for a successful deployment example:
+
+> Note: Due to AWS costs, the link for testing is unavailable.
+![ok Deployment](images/deploiement/ok_deploiement.PNG)
+![ok Deployment](images/web_interface/prediction_good_risk.PNG)
+
+## Perspectives
+
+- Make inferences
+- Recover user logs and re-train models
+- Separe model deployement using aws S3 for more scalability
+
+## Contributing  🤝
+
+We welcome contributions to this project! To contribute:
+
+1. Fork the repository.
+2. Create a new branch (`feature/your-feature-name`).
+3. Commit your changes and push them to your forked repository.
+4. Open a pull request, detailing the changes and their purpose.
+
+## References
+
+- Deployment of Machine Learning Models with Flask, Docker, and GCP: [https://www.youtube.com/watch?v=xaI03GSya0g&t=91s&ab_channel=LeCoinStat](https://www.youtube.com/watch?v=xaI03GSya0g&t=91s&ab_channel=LeCoinStat)
+- How to Deploy ML Solutions with FastAPI, Docker, & AWS: [https://www.youtube.com/watch?v=pJ_nCklQ65w&t=1440s&ab_channel=ShawTalebi](https://www.youtube.com/watch?v=pJ_nCklQ65w&t=1440s&ab_channel=ShawTalebi)
+
+---
