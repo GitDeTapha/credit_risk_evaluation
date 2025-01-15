@@ -112,7 +112,7 @@ Refer to the image below for a successful deployment example:
 
 > Note: Due to AWS costs, the link for testing is unavailable.
 ![ok Deployment](images/deploiement/ok_deploiement.PNG)
-![ok Deployment](images/web_interface/prediction_good_risk.PNG)
+![bad risk](images/web_interface/prediction_bad_risk.PNG)
 
 ## Perspectives
 
