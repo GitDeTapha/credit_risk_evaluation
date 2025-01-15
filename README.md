@@ -90,18 +90,6 @@ Ensure you have the following installed:
 
 ## Deployment
 
-### Docker Deployment
-
-1. Build and tag the Docker image:
-   ```bash
-   docker build -t credit-risk-api .
-   docker tag credit-risk-api moustapha2024/credit-risk-repo
-   ```
-2. Push the image to Docker Hub:
-   ```bash
-   docker push moustapha2024/credit-risk-repo
-   ```
-
 ### AWS Deployment
 
 1. Create an ECS Cluster using the AWS Management Console.
@@ -111,8 +99,9 @@ Ensure you have the following installed:
 Refer to the image below for a successful deployment example:
 
 > Note: Due to AWS costs, the link for testing is unavailable.
+
 ![ok Deployment](images/deploiement/ok_deploiement.PNG)
-![ok Deployment](images/web_interface/prediction_good_risk.PNG)
+![bad risk](images/web_interface/prediction_bad_risk.PNG)
 
 ## Perspectives
 
