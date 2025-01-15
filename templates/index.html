@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Credit Risk Prediction</title>
+    <style>
+        body {
+            background-color: #0f4c81;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .result {
+            font-weight: bolder;
+            margin-top: 20px;
+            font-size: 3.5em;
+        }
+        .good-risk {
+            color: green;
+        }
+        .bad-risk {
+            color: red;
+        }
+        form {
+            margin: 20px;
+        }
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Credit Risk Evaluation API</h1>
+        <p>Fill in the form below to get a credit risk prediction:</p>
+    </header>
+    <main>
+        <form method="POST" action="/">
+            <label>Age: <input type="number" name="Age" required></label><br><br>
+            <label>Sex:
+                <select name="Sex">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </label><br><br>
+            <label>Job: <input type="number" name="Job" required></label><br><br>
+            <label>Housing:
+                <select name="Housing">
+                    <option value="own">Own</option>
+                    <option value="free">Free</option>
+                    <option value="rent">Rent</option>
+                </select>
+            </label><br><br>
+            <label>Saving accounts:
+                <select name="Saving_accounts">
+                    <option value="little">Little</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="quite rich">Quite Rich</option>
+                    <option value="rich">Rich</option>
+                </select>
+            </label><br><br>
+            <label>Checking account:
+                <select name="Checking_account">
+                    <option value="little">Little</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="rich">Rich</option>
+                </select>
+            </label><br><br>
+            <label>Credit amount: <input type="number" name="Credit_amount" required></label><br><br>
+            <label>Duration: <input type="number" name="Duration" required></label><br><br>
+            <label>Purpose:
+                <select name="Purpose">
+                    <option value="car">Car</option>
+                    <option value="radio/TV">Radio/TV</option>
+                    <option value="furniture/equipment">Furniture/Equipment</option>
+                    <option value="business">Business</option>
+                    <option value="education">Education</option>
+                    <option value="repairs">Repairs</option>
+                    <option value="domestic appliances">Domestic Appliances</option>
+                    <option value="vacation/others">Vacation/Others</option>
+                </select>
+            </label><br><br>
+            <button type="submit">Predict</button>
+        </form>
+        {% if result is not none %}
+            <div class="result {% if result == 1 %}good-risk{% else %}bad-risk{% endif %}">
+                {{ "Good risk" if result == 1 else "Bad risk" }}
+            </div>
+        {% endif %}
+    </main>
+    <footer>
+        by Moustapha FALL 
+    </footer>
+</body>
+</html>

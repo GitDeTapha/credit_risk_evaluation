@@ -1,2 +1,8 @@
-ipykernel
-python-dotenv
+pydantic
+pandas
+gunicorn
+joblib
+scikit-learn
+sklearn.preprocessing
+flask
+numpy
